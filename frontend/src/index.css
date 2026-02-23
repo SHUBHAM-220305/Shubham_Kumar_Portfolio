@@ -1,0 +1,92 @@
+@import "@flaticon/flaticon-uicons/css/all/all";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: radial-gradient(circle at center, #0f0f18 0%, #07070c 70%);
+  color: white;
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+.neon-white {
+  text-shadow:
+    0 0 2px rgba(255, 255, 255, 0.5),
+    0 0 4px rgba(255, 255, 255, 0.3),
+    0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.neon-border-flow {
+  position: relative;
+  padding: 1.5px; /* border thickness */
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.neon-border-flow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.9),
+    transparent
+  );
+
+  background-size: 200% 100%;
+  animation: borderFlow 3s linear infinite;
+
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+}
+
+.neon-border-flow nav {
+  position: relative;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+}
+
+/* This cuts the center so only border shows */
+.neon-border-flow::before {
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  padding: 1.5px;
+}
+
+@keyframes borderFlow {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+    font-size: 120%;
+  }
+}
+
+.animate-float {
+  animation: float 1s ease-in-out infinite;
+  display: inline-block;
+}
