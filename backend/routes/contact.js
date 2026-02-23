@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
-      port: process.env.EMAIL_PORT,
+      port: Number(process.env.EMAIL_PORT),
       secure: true,
       auth: {
         user: process.env.EMAIL_USER,
@@ -40,8 +40,11 @@ router.post("/", async (req, res) => {
 
     res.status(200).json({ success: true, message: "Email sent successfully" });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, message: "Email failed" });
+    console.error("MAIL ERROR:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 });
 

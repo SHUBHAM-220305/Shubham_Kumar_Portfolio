@@ -19,5 +19,25 @@ mongoose
 app.use("/api/testimonials", testimonialRoutes);
 app.use("/api/contact", contactRoutes);
 
+app.get("/test-mail", async (req, res) => {
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.EMAIL_HOST,
+      port: Number(process.env.EMAIL_PORT),
+      secure: true,
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+    });
+
+    await transporter.verify();
+    res.send("SMTP Working");
+  } catch (err) {
+    console.error(err);
+    res.send("SMTP Failed: " + err.message);
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
