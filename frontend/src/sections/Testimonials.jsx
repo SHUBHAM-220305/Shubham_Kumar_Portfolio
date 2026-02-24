@@ -17,7 +17,9 @@ export default function Testimonials() {
 
   const fetchTestimonials = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API}/api/testimonials`);
+      const res = await axios.get(
+        `${import.meta.env.VITE_API}/api/testimonials`,
+      );
       if (res.data.length === 0) {
         setTestimonials(defaultTestimonials);
       } else {
@@ -31,13 +33,16 @@ export default function Testimonials() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_API}/api/testimonials`, form);
+      const res = await axios.post(
+        `${import.meta.env.VITE_API}/api/testimonials`,
+        form,
+      );
       setTestimonials((prev) => [res.data, ...prev]);
       setForm({ name: "", role: "", message: "" });
       setShowModal(false);
       fetchTestimonials();
     } catch (error) {
-        console.error(error);
+      console.error(error);
     }
   };
 
@@ -81,23 +86,23 @@ export default function Testimonials() {
         </motion.h2>
 
         {/* Sliding Testimonials */}
-        <div className="relative overflow-hidden">
+        <div className="relative w-full overflow-hidden">
           <motion.div
-            className="flex gap-8"
+            className="flex gap-8 w-max"
             animate={{ x: ["0%", "-50%"] }}
             transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
           >
             {[...testimonials, ...testimonials].map((item, index) => (
               <div
                 key={index}
-                className="min-w-[250px] md:min-w-[350px] bg-[#111827] p-6 rounded-2xl
+                className="max-w-[220px] sm:min-w-[250px] md:min-w-[320px] flex-shrink-0 bg-[#111827] p-5 rounded-2xl
                 border border-yellow-400/20
                 hover:shadow-[0_20px_50px_rgba(250,204,21,0.4)]
                 transition-all duration-500"
               >
-                <p className="text-white/80 mb-4 italic">"{item.message}"</p>
-                <div className="text-yellow-400 font-semibold">{item.name}</div>
-                <div className="text-white/50 text-sm">{item.role}</div>
+                <p className="text-white/80 mb-4 italic text-sm md:text-base">"{item.message}"</p>
+                <div className="text-yellow-400 font-semibold text-sm md:text-base">{item.name}</div>
+                <div className="text-white/50 text-xs md:text-sm">{item.role}</div>
               </div>
             ))}
           </motion.div>

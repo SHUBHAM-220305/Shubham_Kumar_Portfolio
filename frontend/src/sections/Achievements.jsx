@@ -190,7 +190,7 @@ export default function Achievements() {
         <div className="h-[1px] w-16 bg-yellow-400/50"></div>
 
         <h2
-          className="text-base md:text-2xl font-semibold 
+          className="text-sm md:text-2xl font-semibold 
             bg-gradient-to-r from-orange-400 via-yellow-400 to-yellow-300 
             bg-clip-text text-transparent tracking-widest uppercase"
         >
@@ -203,18 +203,18 @@ export default function Achievements() {
       {/* Slider Container */}
       <div className="relative w-full overflow-hidden">
         <motion.div
-          className="flex gap-8"
+          className="flex gap-8 w-max"
           animate={{ x: ["0%", "-50%"] }}
           transition={{
             repeat: Infinity,
-            duration: 5,
+            duration: 15,
             ease: "linear",
           }}
         >
           {[...victoryMoments, ...victoryMoments].map((item, index) => (
             <div
               key={index}
-              className="relative min-w-[380px] h-[220px] rounded-2xl overflow-hidden group"
+              className="relative min-w-[380px] h-[220px] rounded-2xl overflow-hidden group flex-shrink-0"
             >
               <img
                 src={item.image}
@@ -229,7 +229,7 @@ export default function Achievements() {
 
               {/* Title */}
               <div className="absolute bottom-4 left-4">
-                <span className="text-yellow-400 bg-black/80 px-4 py-1 rounded-full text-sm font-bold border border-yellow">
+                <span className="text-yellow-400 bg-black/80 px-4 py-1 rounded-full text-sm font-bold border border-yellow-400">
                   {item.title}
                 </span>
               </div>
